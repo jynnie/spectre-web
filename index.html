@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Spectre</title>
+    <style>
+        #mousepad {
+            display: block;
+            min-width: 100px;
+            min-height: 100px;
+            max-width: calc(100vh - 16px);
+            max-height: calc(100vw - 16px);
+            width: calc(100vw - 16px);
+            height: calc(100vh - 16px  - 38.4px - 42.88px);
+            border: 1px solid black;
+            margin: 10px 0;
+        }
+
+        #mousedot {
+            display: block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            position: absolute;
+            background-color: black;
+            visibility: hidden;
+        }
+    </style>
+  </head>
+  <body>
+      <h1>Spectre</h1>
+      <div id="mousepad"></div>
+      <div id="mousedot"></div>
+      <input type="text" id="roomId" />
+      <button onclick="joinRoom()">Enter</button>
+  </body>
+  <script src="/static/api.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/static/script.js"></script>
+</html>
