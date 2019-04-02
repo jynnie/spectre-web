@@ -21,8 +21,15 @@ const joinRoom = () => {
 const drawMouseDot = el => {    
     // if mouse is down update mouse pos
     if (down) {
-        let x = el.x;
-        let y = el.y;
+        let x;
+        let y;
+        if (el.clientX == undefined) {
+            x = el.touches[0].clientX;
+            y = el.touches[0].clientY;
+        } else {
+            x = el.clientX;
+            y = el.clientY;
+        }
 
         mouseDot.style.visibility = "visible";
         mouseDot.style.top = String(y - 10) + "px";
@@ -43,9 +50,17 @@ const drawMouseDot = el => {
  */
 const getRelMouse = el => {
     let boundingRect = mousePad.getBoundingClientRect();
-    let relY = (el.y - boundingRect.top)/boundingRect.height;
-    let relX = (el.x - boundingRect.left)/boundingRect.width;
+    let relY;
+    let relX;
+    if (el.clientX == undefined) {
+        relY = (el.touches[0].clientY - boundingRect.top)/boundingRect.height;
+        relX = (el.touches[0].clientX - boundingRect.left)/boundingRect.width;
+    } else {
+        relY = (el.clientY - boundingRect.top)/boundingRect.height;
+        relX = (el.clientX - boundingRect.left)/boundingRect.width;
+    }
     console.log(relX, relY);
+    console.log(el);
     return {x: relX, y: relY};
 }
 
@@ -59,6 +74,22 @@ mousePad.addEventListener("mousemove", el => {
 })
 
 document.addEventListener("mouseup", el => {
+    down = false;
+    drawMouseDot(el);
+    socket.emit("user off");
+})
+
+mousePad.addEventListener("touchstart", el => {
+    down = true;
+    drawMouseDot(el);
+})
+
+mousePad.addEventListener("touchmove", el => {
+    drawMouseDot(el);
+    el.preventDefault();
+})
+
+document.addEventListener("touchend", el => {
     down = false;
     drawMouseDot(el);
     socket.emit("user off");

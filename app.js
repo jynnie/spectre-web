@@ -37,7 +37,7 @@ io.on('connection', socket => {
 
     // screen on first connect creates its own socket room
     socket.on("screen register", uid => {
-        let roomID = String(uid);
+        let roomID = String(uid).toUpperCase();
         socket.name = roomID; // screen uid serves as socket room id
         socket.join(roomID);
         socket.room = roomID;
@@ -46,7 +46,7 @@ io.on('connection', socket => {
 
     // user joins a socket room with a screen
     socket.on("user join", uid => {
-        let roomID = String(uid);
+        let roomID = String(uid).toUpperCase();
         socket.join(roomID);
         socket.room = roomID;
         console.log(`User ${socket.id} joining ${uid}`);
@@ -57,6 +57,7 @@ io.on('connection', socket => {
 
     socket.on("user point", relPos => {
         // tells screen new relative position
+        // console.log(`New point at (${relPos.x}, ${relPos.y})`);
         io.sockets.in(socket.room).emit("point update", socket.id, relPos);
     })
 
