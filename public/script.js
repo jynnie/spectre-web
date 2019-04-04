@@ -3,6 +3,12 @@ const socket = io();
 // flag if mouse is down
 let down = false;
 
+// disconnect socket after a minute of inactivity
+let activityTimeout = setTimeout(() => {
+    socket.disconnect();
+    console.log("Too much time inactive, disconnecting...");
+}, 60000);
+
 const mouseDot = document.getElementById("mousedot");
 const mousePad = document.getElementById("mousepad");
 
@@ -12,7 +18,7 @@ const mousePad = document.getElementById("mousepad");
 const joinRoom = () => {
     const id = document.getElementById("roomId");
     socket.emit("user join", id.value);
-}
+};
 
 /**
  * drawing where a user is currently clicking on client-side
@@ -41,7 +47,7 @@ const drawMouseDot = el => {
     // remove mouse dot
         mouseDot.style.visibility = "hidden";
     }
-}
+};
 
 /**
  * return relative position of mouse to top left of mousepad
@@ -59,38 +65,53 @@ const getRelMouse = el => {
         relY = (el.clientY - boundingRect.top)/boundingRect.height;
         relX = (el.clientX - boundingRect.left)/boundingRect.width;
     }
-    console.log(relX, relY);
-    console.log(el);
+    // console.log(relX, relY);
+    // console.log(el);
     return {x: relX, y: relY};
-}
+};
 
 mousePad.addEventListener("mousedown", el => {
     down = true;
     drawMouseDot(el);
-})
+    resetActivity();
+});
 
 mousePad.addEventListener("mousemove", el => {
     drawMouseDot(el);
-})
+    resetActivity();
+});
 
 document.addEventListener("mouseup", el => {
     down = false;
     drawMouseDot(el);
     socket.emit("user off");
-})
+    resetActivity();
+});
 
 mousePad.addEventListener("touchstart", el => {
     down = true;
     drawMouseDot(el);
-})
+    resetActivity();
+});
 
 mousePad.addEventListener("touchmove", el => {
     drawMouseDot(el);
     el.preventDefault();
-})
+    resetActivity();
+});
 
 document.addEventListener("touchend", el => {
     down = false;
     drawMouseDot(el);
     socket.emit("user off");
-})
+    resetActivity();
+});
+
+// when active, reset activity timeout
+const resetActivity = () => {
+    clearTimeout(activityTimeout);
+    activityTimeout = setTimeout(() => {
+        socket.disconnect();
+        console.log("Too much time inactive, disconnecting...");
+    }, 60000);
+};
