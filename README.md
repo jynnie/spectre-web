@@ -6,22 +6,25 @@ Somehow, our [first clip](https://clips.twitch.tv/HomelyAssiduousQueleaSoonerLat
 
 ## Installation 🔨
 
-This is the server and web client component of spectre. Checkout the desktop component [here](https://github.com/jynnie/spectre-app).
+This is the server and web client component of spectre. Make sure to install the desktop component [here](https://github.com/jynnie/spectre-app).
  
 ```
 # install dependencies
 $ npm install
-# start in development
-$ npm run dev
-# general start
-$ npm start
 ```
 
 ## Usage 🔦
 
-Users can connect to the web client via web browser (Firefox and Chrome currently stable in both desktop and mobile). Enter the room code of the desktop screen to connect to, and use mouse or touch in the mousepad square to control their light circle.
+```
+# to start the server
+$ npm start
+```
 
-Users will be disconnected on session end or after a minute of inactivity.
+When the application is run, access it on port 8080 via web browser. This has been tested on Firefox and Chrome in both desktop and mobile, may work on other web browsers. 
+
+To connect to a screen, enter the corresponding room code and use mouse or touch in the mousepad square to control your light circle.
+
+Users will be disconnected on session end (i.e. closing tab or browser crash) or after a minute of inactivity.
 
 ## Why did you make this? 👀
 
