@@ -74,4 +74,4 @@ io.on('connection', socket => {
 
 http.listen(PORT, () => {
     console.log(`Running Spectre on port ${PORT}!`);
-  });
+});
