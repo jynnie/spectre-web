@@ -2,6 +2,8 @@
 
 Web server component to a desktop overlay mod that allows other users to control "flashlights" on the screen. Playful experiment about the involvement of spectators seeing.
 
+Somehow, our [first clip](https://clips.twitch.tv/HomelyAssiduousQueleaSoonerLater) went kind of viral.
+
 ## Installation 🔨
 
 This is the server and web client component of spectre. Checkout the desktop component [here](https://github.com/jynnie/spectre-app).
