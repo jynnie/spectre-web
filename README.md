@@ -25,7 +25,7 @@ Users will be disconnected on session end or after a minute of inactivity.
 
 ## Why did you make this? 👀
 
-I developed this as part of a project to experiment with how spectators (spectres) can be recognized and play in the game space. What better way to highlight what spectators do then by *highlighting* what they see? Inspired by _Hidden Agenda_ and the flashlight mod in _Osu_, we have Spectre.
+I developed this as part of a project to experiment with how spectators (spectres) can be recognized and play in the game space. What better way to highlight what spectators do then by *highlighting* what they see? Inspired by _Hidden Agenda_ and the flashlight mod in _osu!_, we have Spectre.
 
 ### List of Features in Consideration ⏲
 
