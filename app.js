@@ -44,6 +44,14 @@ io.on('connection', socket => {
         console.log(`Screen ${roomID} reporting`)
     });
 
+    // screen joins a specific socket room
+    socket.on("screen join", uid => {
+        let roomID = String(uid).toUpperCase();
+        socket.join(roomID);
+        socket.room = roomID;
+        console.log(`Screen joining ${uid}`);
+    });
+
     // user joins a socket room with a screen
     socket.on("user join", uid => {
         let roomID = String(uid).toUpperCase();
